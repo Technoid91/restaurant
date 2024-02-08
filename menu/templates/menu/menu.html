@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
     <h1 class="text-center">Our Menu</h1>
+    <hr>
     {% for category in categories %}
-        <h2 class="text-center">{{ category.name }}</h2>
+        <h2 class="text-center text-uppercase">{{ category.name }}</h2>
+        <hr>
         <div class="row">
             {% for food in category.food_set.all %}
                 <div class="col-md-4 mb-4">
@@ -22,7 +24,7 @@
                             {% endif %}
                             </div>
                             <p class="card-text mt-auto">{{ food.description }}</p>
-                            <p class="mt-auto text-end">€ {{ food.price }}</p>
+                            <p class="mt-auto text-end item-price">€ {{ food.price }}</p>
                         </div>
                     </div>
                 </div>

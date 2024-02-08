@@ -1,0 +1,52 @@
+.site-header {
+    background-color: brown;
+}
+
+.navbar-brand img {
+    max-width: 150px;
+    max-height: 120px;
+}
+#navbarNav {
+    margin-top: 70px;
+}
+.nav-item {
+    font-size: 1.3rem;
+}
+
+
+.carousel {
+    max-width: 70%;
+    margin: auto;
+}
+
+
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: #fff;
+}
+
+.carousel-caption {
+    top: 10px;
+    bottom: auto;
+    background-color: rgba(0,0,0,0.8);
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.carousel-caption .news-text {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.carousel-caption:hover .news-text {
+    max-height: 100px;
+}
+
+.item-price {
+    text-align: right;
+}
