@@ -1,0 +1,62 @@
+{% extends "booking.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block booking-options %}
+
+<!-- Delete confirmation modal -->
+<div class="modal fade" id="cancellationModal" tabindex="-1" aria-labelledby="cancellationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancellationModalLabel">Cancel booking?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to cancel your booking? This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="confirmCancellation">Cancel Booking</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h2>Cancel Booking</h2>
+<!-- Здесь размещается форма для отмены бронирования -->
+<form method="post" id="cancelBookingForm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Cancel Booking</button>
+</form>
+
+{% endblock booking-options %}
+
+
+<!--<div id="cancelBookingModal" class="modal fade" tabindex="-1">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <div class="modal-header">-->
+<!--                <h5 class="modal-title">Cancel Booking</h5>-->
+<!--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--            </div>-->
+<!--            <div class="modal-body">-->
+<!--                <form id="cancelBookingForm" method="post">-->
+<!--                    {% csrf_token %}-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="email">Email</label>-->
+<!--                        <input type="email" class="form-control" id="email" name="email" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="reference">Reference</label>-->
+<!--                        <input type="text" class="form-control" id="reference" name="reference" required>-->
+<!--                    </div>-->
+<!--                    <button type="submit" class="btn btn-danger">Cancel Booking</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->

@@ -1,9 +1,7 @@
 from django.urls import path
-from .views import show_menu
+from . import views
 
-app_name = 'menu'
 
 urlpatterns = [
-    path('', show_menu, name='menu'),  # URL для страницы с меню
-    # Дополнительные URL-адреса вашего приложения могут быть добавлены здесь
+    path('', views.show_menu, name='menu'),
 ]

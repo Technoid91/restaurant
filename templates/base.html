@@ -1,5 +1,12 @@
 {% load static %}
 
+{% url 'home' as home_url %}
+{% url 'menu' as menu_url %}
+{% url 'book' as booking_url %}
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+{% url 'account_logout' as logout_url %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,35 +29,55 @@
             <!-- Logo -->
             <a class="navbar-brand" href="#">
                 <img src="{% static 'images/site_logo.png' %}" alt="PixelSteak Logo">
+                Pixel Steak
             </a>
             <!-- Navigation Links -->
-            <div class="collapse navbar-collapse align-items-end" id="navbarNav">
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'menu:menu' %}">Menu</a>
+                        <a class="nav-link" href="{% url 'menu' %}">Menu</a>
                     </li>
-                    <!-- Add more navigation links if needed -->
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="{% url 'booking' %}">Book a Table</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- Content -->
-    <div class="container mt-4">
-        {% block content %}
-        {% endblock %}
-    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3 bg-light content-area">
+                {% block sidebar %}
+
+                {% endblock sidebar%}
+            </div>
+            <div class="col-9 content-area">
+                {% block content %}
+
+                {% endblock content %}
+
+            </div>
+
+        </div>
 
     <!-- Footer -->
     <footer class="footer bg-dark text-light py-4">
+        <div>
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-x-twitter"></i>
+        </div>
         <div class="container text-center">
             <span>&copy; 2024 PixelSteak. All rights reserved.</span>
         </div>
     </footer>
-
+    <script src="{% static 'js/script.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
 </body>

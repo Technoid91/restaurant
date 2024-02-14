@@ -3,50 +3,75 @@
 }
 
 .navbar-brand img {
-    max-width: 150px;
-    max-height: 120px;
+    /*max-width: auto;*/
+    max-height: 70px;
 }
-#navbarNav {
-    margin-top: 70px;
-}
+
 .nav-item {
     font-size: 1.3rem;
 }
 
 
+.content-area {
+    padding-top: 15px;
+}
+
+.side-items {
+    border: 2px solid grey;
+    background-color: #657381;
+    margin: 4px 0;
+    text-align: center;
+    color: lightgray;
+
+    /*vertical-align: center;*/
+}
+
+.side-items:hover {
+    background-color: brown;
+    border: 2px solid tomato;
+}
+
 .carousel {
-    max-width: 70%;
+    max-width: 90%;
     margin: auto;
 }
 
-
-.carousel-control-prev,
-.carousel-control-next {
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    color: #fff;
+.carousel-caption {
+  width: 100%;
+  left: 0;
+  right: 0;
+  text-align: center; /* Центрируем текст внутри карусельного заголовка */
 }
 
 .carousel-caption {
-    top: 10px;
-    bottom: auto;
+    /*top: 10px;*/
+    /*bottom: auto;*/
     background-color: rgba(0,0,0,0.8);
     color: white;
     padding: 5px;
     border-radius: 4px;
 }
 
-.carousel-caption .news-text {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease;
-}
-
-.carousel-caption:hover .news-text {
-    max-height: 100px;
+.sticky-bar {
+    width: 22%;
+    position: fixed;
 }
 
 .item-price {
     text-align: right;
+}
+
+.time-input input{
+    width: 100px;
+    line-height: 1.2rem;
+}
+
+
+#booking-table {
+    background-color: rgba(0,0,0,0.6);
+    border-radius: 4px;
+    padding: 6px;
+    width: 50%;
+    height: 50rem;
+    margin: auto;
 }
