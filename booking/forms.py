@@ -22,6 +22,9 @@ class ReservationForm(forms.ModelForm):
         model = Reservation
         fields = ('party_size', 'date', 'time', 'first_name', 'last_name',
                   'phone_number', 'email', 'comments', )
+        labels = {
+            'phone_number': 'Phone',
+        }
 
     def save(self, commit=True):
         instance = super().save(commit=False)

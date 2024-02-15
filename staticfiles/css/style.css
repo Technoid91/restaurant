@@ -1,5 +1,14 @@
+p{
+    font-family: Roboto, sans-serif;
+
+}
+
 .site-header {
     background-color: brown;
+}
+
+.brand {
+    font-family: Lato, sans-serif;
 }
 
 .navbar-brand img {
@@ -56,6 +65,13 @@
     color: white;
     text-align: center;
     border-radius: 4px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    backgorund-color: transparent;
+    border: none;
+
 }
 
 

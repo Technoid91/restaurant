@@ -38,13 +38,13 @@
         <div class="container">
             <!-- Здесь размещается форма для бронирования -->
             <div class="row">
-                <div class="col">
+                <div class="col-12 col-md">
                     {{ form.party_size|as_crispy_field }}
                 </div>
-                <div class="col">
+                <div class="col-12 col-md">
                     {{ form.date|as_crispy_field }}
                 </div>
-                <div class="col time-input">
+                <div class="col-12 col-md time-input">
                     {{ form.time|as_crispy_field }}
                 </div>
             </div>
