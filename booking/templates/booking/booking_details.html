@@ -38,11 +38,9 @@
 <h1>Thank you for booking</h1>
 <h3>Booking details</h3>
 <h3>Reference number: {{ reservation.reference }}</h3>
-<p>You can use your email address and reference number to cancel your booking</p>
-<p>Alternatively you can make a call</p>
+<p>Call us if you wish to cancel your reservation</p>
 <p>Name: {{reservation.first_name}} {{reservation.last_name}}</p>
 <p>Date and time: {{ reservation.date_time }}</p>
-<p>Assigned tables: {{reservation.table_number}}</p>
 
 
 {% endblock content %}

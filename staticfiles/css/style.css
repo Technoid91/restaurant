@@ -3,7 +3,6 @@
 }
 
 .navbar-brand img {
-    /*max-width: auto;*/
     max-height: 70px;
 }
 
@@ -49,20 +48,16 @@
 }
 
 .carousel-caption {
-  width: 100%;
-  left: 0;
-  right: 0;
-  text-align: center; /* Центрируем текст внутри карусельного заголовка */
-}
-
-.carousel-caption {
-    /*top: 10px;*/
-    /*bottom: auto;*/
+    width: 98%;
+    left: 0;
+    right: 0;
+    padding: 5px;
     background-color: rgba(0,0,0,0.8);
     color: white;
-    padding: 5px;
+    text-align: center;
     border-radius: 4px;
 }
+
 
 .sticky-bar {
     width: 22%;
@@ -84,10 +79,35 @@
     background-color: rgba(0,0,0,0.6);
     border-radius: 4px;
     padding: 6px;
-
 }
 
 #booking-table button {
     margin-top: 5em;
 }
 
+
+@media screen and (max-width: 600px){
+    .carousel {
+        position: static;
+        max-width: 100%;
+        margin: auto;
+    }
+
+    .carousel-caption {
+        width: 100%;
+        position: static;
+        padding: 5px;
+        background-color: rgba(0,0,0,0.6);
+    }
+
+
+
+    #booking-table {
+        width: 90%;
+        margin: 0 auto 10px auto;
+        background-color: rgba(0,0,0,0.6);
+        border-radius: 4px;
+        padding: 6px;
+    }
+
+}
