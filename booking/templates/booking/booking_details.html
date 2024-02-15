@@ -2,7 +2,38 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
+{% block sidebar %}
+
+
+
+
+
+
+
+<div class="container side-info">
+    <h3><i class="fa-solid fa-clock"></i> Working hours</h3>
+    <hr>
+    <p>14:00 - 23:00</p>
+    <p>every day</p>
+</div>
+
+<div class="container side-info">
+    <h3><i class="fa-solid fa-location-dot"></i> Address</h3>
+    <hr>
+    <p>Bootstrap st. Tralee, Co.Kerry</p>
+</div>
+
+{% endblock sidebar %}
+
 {% block content %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 
 <h1>Thank you for booking</h1>
 <h3>Booking details</h3>
@@ -12,5 +43,6 @@
 <p>Name: {{reservation.first_name}} {{reservation.last_name}}</p>
 <p>Date and time: {{ reservation.date_time }}</p>
 <p>Assigned tables: {{reservation.table_number}}</p>
+
 
 {% endblock content %}

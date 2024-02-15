@@ -5,23 +5,16 @@
 
 {% block sidebar %}
 
-<div class="container">
-    <div id="book-table-link" class="container side-items">
-        <h5>Book a table</h5>
-    </div>
-    <div id="cancel-booking-link" class="container side-items">
-        <h5>Cancel booking</h5>
-    </div>
-</div>
-
-<div class="container">
+<div class="container side-info">
     <h3><i class="fa-solid fa-clock"></i> Working hours</h3>
+    <hr>
     <p>14:00 - 23:00</p>
     <p>every day</p>
 </div>
 
-<div class="container">
+<div class="container side-info">
     <h3><i class="fa-solid fa-location-dot"></i> Address</h3>
+    <hr>
     <p>Bootstrap st. Tralee, Co.Kerry</p>
 </div>
 
@@ -30,23 +23,13 @@
 
 {% block content %}
 
-
-
-<!-- Django messages -->
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 offset-md-2">
-      {% for message in messages %}
-      <div class="alert {{ message.tags }} alert-dismissible
-        fade show" id="msg" role="alert">
-        {{ message | safe }}
-        <button type="button" class="btn-close"
-          data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</div>
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 
 <div id="booking-table">
     <h2>Book a Table</h2>
@@ -85,14 +68,13 @@
                 <div class="col-9">
                     {{ form.comments|as_crispy_field }}
                 </div>
-                <div class="col-2" style="margin-top: 15rem;">
-                    <button type="submit" class="btn btn-primary">Book</button>
+                <div class="col-3">
+                    <button type="submit" class="btn btn-primary">Book Table</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
 
+
 {% endblock content %}
-
-

@@ -16,7 +16,6 @@ def show_menu(request):
             categories_with_food[category] = foods_in_category
 
             for food in foods_in_category:
-                # Создаем список иконок перца для каждого блюда с остротой
                 food.spiciness_icons = ['' for _ in range(food.spiciness)] if food.spiciness > 0 else []
 
     return render(request, 'menu/menu.html', {'categories': categories_with_food})

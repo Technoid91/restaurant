@@ -1,12 +1,10 @@
 import uuid
 from datetime import datetime, timedelta
-from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect
 from django.utils import timezone
 from django.contrib import messages
 from .models import Table, Reservation
-from .forms import ReservationForm, CancellationForm
+from .forms import ReservationForm
 
 
 def booking(request):
@@ -23,7 +21,7 @@ def booking(request):
             current_datetime = timezone.now()
             if date_time <= current_datetime:
                 form.add_error(None, "Дата и время бронирования должны быть больше текущей даты и времени.")
-                return render(request, 'booking/booking.html', {'form': form})
+                return render(request, 'booking/booking-template.html', {'form': form})
 
             start_time = date_time - timedelta(hours=1, minutes=59)
             end_time = date_time + timedelta(hours=1, minutes=59)
@@ -35,10 +33,9 @@ def booking(request):
             reserved_tables = Table.objects.filter(reservation__in=existing_reservations)
             available_tables = all_tables.exclude(pk__in=reserved_tables.values_list('pk', flat=True))
 
-            # Сортируем доступные столы по емкости в убывающем порядке
             available_tables = available_tables.order_by('capacity')
 
-            assigned_tables = []  # Список назначенных столов
+            assigned_tables = []
             if party_size > 0:
                 while party_size > 0 and available_tables.exists():
                     largest_table = available_tables.last()
@@ -57,27 +54,29 @@ def booking(request):
                     new_reservation.date_time = date_time
                     new_reservation.reference = str(uuid.uuid4())[:8]
                     new_reservation.save()
-                    # Назначаем столы на бронирование
                     new_reservation.table_number.set(assigned_tables)
-                    form.save_m2m()  # Сохранение связанных столов
+                    form.save_m2m()
 
                     messages.add_message(
                         request, messages.SUCCESS,
                         'Reservation successfully created.'
                     )
-                    #return redirect('booking')
                     return redirect(f'ref/{new_reservation.reference}')
                 else:
 
                     messages.error(request, 'Sorry, no tables available for the requested amount of people')
                     form.add_error(None, "Sorry, no tables available for the requested amount of people")
     else:
-        form = ReservationForm()  # Создаем форму бронирования
+        form = ReservationForm()
 
     return render(request, 'booking/booking.html', {'form': form})
 
 
 def booking_details(request, reference):
-    # Получаем объект бронирования по номеру reference
     reservation = get_object_or_404(Reservation, reference=reference)
     return render(request, 'booking/booking_details.html', {'reservation': reservation})
+
+
+
+
+

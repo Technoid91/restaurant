@@ -1,14 +1,12 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 
 
 
 {% block sidebar %}
 <div class="sticky-bar">
-    <div class="container">
-        <input id="vegan-only" type="checkbox">
-        <label for="vegan-only">Vegan only</label>
-    </div>
     <h4 class="text-center">Categories:</h4>
     {% for category in categories %}
     <div class="container side-items">
@@ -56,5 +54,6 @@
     {% endfor %}
 </div>
 {% endfor %}
+
 
 {% endblock %}
