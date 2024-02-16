@@ -3,6 +3,10 @@ p{
 
 }
 
+.btn-signup {
+    border: 2px solid brown;
+}
+
 .site-header {
     background-color: brown;
 }
