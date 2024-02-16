@@ -31,10 +31,7 @@ Based on for how many people customer books places, the system
 automatically assign available tables. It tries to fit in everyone
 and avoid wasting tables at the same time. The system also
 checks the other reservations to prevent double booking.
-To make booking process easier, it does not require any
-registration or authentication. It allows customer to make
-reservation straight away without struggling with registration
-forms for a website they do not use everyday.
+To make booking the user should be registered and logged in.
 
 - ###Responsive design
 Using Bootstrap and custom CSS make the web application look good
@@ -46,9 +43,11 @@ both on mobile devices and desktop screens.
 
 - ###HTML
 No errors were returned when passing the official
-[W3Cvalidator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpixel-steak-5f7f6955f42e.herokuapp.com%2F)
+[W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpixel-steak-5f7f6955f42e.herokuapp.com%2F)
 
 - ###CSS
+No errors were returned when passing the official
+[Jigsaw validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fpixel-steak-5f7f6955f42e.herokuapp.com%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=ru)
 
 
 - ###Python
@@ -79,5 +78,5 @@ price drops
 
 - ### Booking management
 Ability for user to edit or cancel the reservation. It can be done
-by forcing user to register on the website or using reservation
+by creating user account web page or using reservation
 reference number as a unique secure ID.
