@@ -6,6 +6,11 @@ from cloudinary.models import CloudinaryField
 
 # News model
 class New(models.Model):
+    """
+    Stores news and special offers objects to
+    represent them on the home page
+
+    """
     title = models.CharField(max_length=200, unique=True)
     image = CloudinaryField('image', default='placeholder')
     text = models.TextField()

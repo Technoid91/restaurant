@@ -1,39 +1,83 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+#Pixel steak
+<hr>
+Pixel steak - is the restaurant booking application.
+It allows customer to browse company news, restaurant menu
+and provides functionality to book a table or few.
 
-Welcome,
+##Features
 
-This is the Code Institute student template for Codeanywhere. If you are using Gitpod then you need [this template](https://github.com/Code-Institute-Org/gitpod-full-template) instead.  We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+- ###Homepage
+It introduces user the upcoming events and special offers.
+Designed as moving slides with titles and description,
+it also allows user to manipulate with slides by clicking on
+news list items on the left sidebar.
+The site owner can add, delete or edit slides to show,
+using administration panel. The website fetch them automatically
+from the cloud based data base
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **August 30th, 2023**
 
-## Codeanywhere Reminders
+- ###Menu
+Shows user available dishes, short description and pricing.
+Also provides additional information about vegan and spicy
+dishes using icons.
+The site owner can add, edit or delete categories and dishes
+in these categories. The web application show only categories
+which have dishes. When adding a new dish, site owner can specify
+is it vegan and hot spicy is it.
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere, in the terminal, type:
+- ###Booking system
+Provides customer the form to fill out and book a table.
+Based on for how many people customer books places, the system 
+automatically assign available tables. It tries to fit in everyone
+and avoid wasting tables at the same time. The system also
+checks the other reservations to prevent double booking.
+To make booking process easier, it does not require any
+registration or authentication. It allows customer to make
+reservation straight away without struggling with registration
+forms for a website they do not use everyday.
 
-`python3 -m http.server`
+- ###Responsive design
+Using Bootstrap and custom CSS make the web application look good
+both on mobile devices and desktop screens.
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+## Testing
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere with no-cache, you can use this alias for `python3 -m http.server`.
+<hr>
 
-`http_server`
+- ###HTML
+No errors were returned when passing the official
+[W3Cvalidator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpixel-steak-5f7f6955f42e.herokuapp.com%2F)
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+- ###CSS
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+- ###Python
+All python files passed CI Python Linter with no issues.
 
-To log into the Heroku toolbelt CLI:
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+## Deployment
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+<hr>
 
----
+The web application was deployed on Heroku
 
-Happy coding!
+## Improvement
+
+<hr>
+The project represents basic functionality however the structure
+allows to scale it dramatically and add more features
+
+- ### Booking from the news slides
+On the homepage the button book a table can be placed on each
+slide and redirect user to the booking page with the date filled
+already. 
+
+- ### Menu sorting and filters
+The menu structure allows to add filters (e.g. "vegan only"), and
+order by feature. It also can add special styling to highlight 
+price drops
+
+- ### Booking management
+Ability for user to edit or cancel the reservation. It can be done
+by forcing user to register on the website or using reservation
+reference number as a unique secure ID.

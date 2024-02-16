@@ -11,7 +11,9 @@ class ReservationForm(forms.ModelForm):
                     for hour in range(16, 21)
                     for minute in range(0, 45, 15)]
 
-    time = forms.ChoiceField(choices=TIME_CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
+    time = forms.ChoiceField(choices=TIME_CHOICES, widget=forms.Select(
+        attrs={'class': 'form-control'})
+                             )
 
     party_size = forms.IntegerField(min_value=1, max_value=10)
 
@@ -27,13 +29,19 @@ class ReservationForm(forms.ModelForm):
         }
 
     def save(self, commit=True):
+        """
+        saves date and time from to fields to a single one
+        in the required format
+        """
         instance = super().save(commit=False)
         date = self.cleaned_data['date']
         time_str = self.cleaned_data['time']
         time = datetime.strptime(time_str, '%H:%M').time()
 
         datetime_without_timezone = datetime.combine(date, time)
-        timezone_aware_datetime = timezone.make_aware(datetime_without_timezone, timezone.get_current_timezone())
+        timezone_aware_datetime = timezone.make_aware(
+            datetime_without_timezone, timezone.get_current_timezone()
+        )
         instance.date_time = timezone_aware_datetime
         if commit:
             instance.save()

@@ -67,14 +67,6 @@ p{
     border-radius: 4px;
 }
 
-.carousel-control-prev,
-.carousel-control-next {
-    backgorund-color: transparent;
-    border: none;
-
-}
-
-
 .sticky-bar {
     width: 22%;
     position: fixed;

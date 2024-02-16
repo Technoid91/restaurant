@@ -6,4 +6,3 @@ from .models import New
 @admin.register(New)
 class NewAdmin(admin.ModelAdmin):
     list_display = ('title', 'image', 'text')
-

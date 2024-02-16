@@ -8,6 +8,11 @@ from .forms import ReservationForm
 
 
 def booking(request):
+    """
+    renders booking form on the web page.
+    Operates with :model:Table and :model:Reservation
+
+    """
     if request.method == 'POST':
         form = ReservationForm(request.POST)
         if form.is_valid():
@@ -20,8 +25,10 @@ def booking(request):
 
             current_datetime = timezone.now()
             if date_time <= current_datetime:
-                form.add_error(None, "Дата и время бронирования должны быть больше текущей даты и времени.")
-                return render(request, 'booking/booking-template.html', {'form': form})
+                form.add_error(None, "Date and time can not be in past")
+                return render(
+                    request, 'booking/booking-template.html', {'form': form}
+                )
 
             start_time = date_time - timedelta(hours=1, minutes=59)
             end_time = date_time + timedelta(hours=1, minutes=59)
@@ -30,8 +37,12 @@ def booking(request):
                 date_time__range=(start_time, end_time)
             )
             all_tables = Table.objects.all()
-            reserved_tables = Table.objects.filter(reservation__in=existing_reservations)
-            available_tables = all_tables.exclude(pk__in=reserved_tables.values_list('pk', flat=True))
+            reserved_tables = Table.objects.filter(
+                reservation__in=existing_reservations
+            )
+            available_tables = all_tables.exclude(
+                pk__in=reserved_tables.values_list('pk', flat=True)
+            )
 
             available_tables = available_tables.order_by('capacity')
 
@@ -47,7 +58,9 @@ def booking(request):
                     if party_size > 0:
                         assigned_tables.append(largest_table)
                         party_size = party_size - largest_table.capacity
-                        available_tables = available_tables.exclude(pk=largest_table.pk)
+                        available_tables = available_tables.exclude(
+                            pk=largest_table.pk
+                        )
                 if party_size == 0:
 
                     new_reservation = form.save(commit=False)
@@ -64,8 +77,11 @@ def booking(request):
                     return redirect(f'ref/{new_reservation.reference}')
                 else:
 
-                    messages.error(request, 'Sorry, no tables available for the requested amount of people')
-                    form.add_error(None, "Sorry, no tables available for the requested amount of people")
+                    messages.error(request,
+                                   'Sorry, no tables available for the '
+                                   'requested amount of people')
+                    form.add_error(None, "Sorry, no tables available for "
+                                         "the requested amount of people")
     else:
         form = ReservationForm()
 
@@ -73,10 +89,10 @@ def booking(request):
 
 
 def booking_details(request, reference):
+    """
+    renders booking details page for the user
+
+    """
     reservation = get_object_or_404(Reservation, reference=reference)
-    return render(request, 'booking/booking_details.html', {'reservation': reservation})
-
-
-
-
-
+    return render(request, 'booking/booking_details.html',
+                  {'reservation': reservation})

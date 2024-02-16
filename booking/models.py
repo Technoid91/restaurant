@@ -6,6 +6,9 @@ import uuid
 
 # Table model
 class Table(models.Model):
+    """
+    Stores available tables and their capacity
+    """
     table_number = models.CharField(max_length=200, unique=True)
     capacity = models.IntegerField(default=2)
 
@@ -15,6 +18,9 @@ class Table(models.Model):
 
 # Booking model
 class Reservation(models.Model):
+    """
+    Stores a single table booking record related to :model:`Table`
+    """
     party_size = models.IntegerField()
     date_time = models.DateTimeField()
     first_name = models.CharField(max_length=50)
