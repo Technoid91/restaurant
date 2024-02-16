@@ -1,12 +1,12 @@
-#Pixel steak
+# Pixel steak
 <hr>
 Pixel steak - is the restaurant booking application.
 It allows customer to browse company news, restaurant menu
 and provides functionality to book a table or few.
 
-##Features
+## Features
 
-- ###Homepage
+- ### Homepage
 It introduces user the upcoming events and special offers.
 Designed as moving slides with titles and description,
 it also allows user to manipulate with slides by clicking on
@@ -16,7 +16,7 @@ using administration panel. The website fetch them automatically
 from the cloud based data base
 
 
-- ###Menu
+- ### Menu
 Shows user available dishes, short description and pricing.
 Also provides additional information about vegan and spicy
 dishes using icons.
@@ -25,7 +25,7 @@ in these categories. The web application show only categories
 which have dishes. When adding a new dish, site owner can specify
 is it vegan and hot spicy is it.
 
-- ###Booking system
+- ### Booking system
 Provides customer the form to fill out and book a table.
 Based on for how many people customer books places, the system 
 automatically assign available tables. It tries to fit in everyone
@@ -33,7 +33,7 @@ and avoid wasting tables at the same time. The system also
 checks the other reservations to prevent double booking.
 To make booking the user should be registered and logged in.
 
-- ###Responsive design
+- ### Responsive design
 Using Bootstrap and custom CSS make the web application look good
 both on mobile devices and desktop screens.
 
@@ -41,16 +41,16 @@ both on mobile devices and desktop screens.
 
 <hr>
 
-- ###HTML
+- ### HTML
 No errors were returned when passing the official
 [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpixel-steak-5f7f6955f42e.herokuapp.com%2F)
 
-- ###CSS
+- ### CSS
 No errors were returned when passing the official
 [Jigsaw validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fpixel-steak-5f7f6955f42e.herokuapp.com%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=ru)
 
 
-- ###Python
+- ### Python
 All python files passed CI Python Linter with no issues.
 
 
