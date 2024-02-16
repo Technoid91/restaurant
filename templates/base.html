@@ -55,7 +55,7 @@
                         <a class="nav-link" href="{% url 'booking' %}">Book a Table</a>
                     </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
+                    <li class="nav-item ">
                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'account_logout' %}">Logout</a>
                     </li>
                     {% else %}
@@ -72,6 +72,7 @@
         </div>
     </nav>
 
+
     <!-- Content -->
     <div class="container-fluid">
         <div class="row">
@@ -81,6 +82,13 @@
                 {% endblock sidebar%}
             </div>
             <div class="col-md-9 сol-12 content-area">
+                  <div class="user-status">
+                      {% if user.is_authenticated %}
+                      <p class="text-end m-3" style="text-align: right;">You are logged in as {{ user }}</p>
+                      {% else %}
+                      <p class="text-end m-3" style="text-align: right;">You are not logged in</p>
+                      {% endif %}
+                  </div>
                 {% block content %}
 
                 {% endblock content %}

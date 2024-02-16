@@ -31,6 +31,8 @@
     </ul>
 {% endif %}
 
+{% if user.is_authenticated %}
+
 <div id="booking-table">
     <h2>Book a Table</h2>
     <form method="post">
@@ -75,6 +77,12 @@
         </div>
     </form>
 </div>
+
+{% else %}
+<div class="container side-info">
+    <h3>Please <a href="{% url 'account_login' %}">log in</a> or <a href="{% url 'account_signup' %}">signup</a> first</h3>
+</div>
+{% endif%}
 
 
 {% endblock content %}

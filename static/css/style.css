@@ -23,6 +23,11 @@ p{
     font-size: 1.3rem;
 }
 
+.user_status {
+    text-align: right;
+    padding-right: 5px;
+}
+
 .content-area {
     padding-top: 15px;
 }

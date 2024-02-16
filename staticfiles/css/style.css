@@ -3,6 +3,10 @@ p{
 
 }
 
+.btn-signup {
+    border: 2px solid brown;
+}
+
 .site-header {
     background-color: brown;
 }
@@ -17,6 +21,11 @@ p{
 
 .nav-item {
     font-size: 1.3rem;
+}
+
+.user_status {
+    text-align: right;
+    padding-right: 5px;
 }
 
 .content-area {
@@ -66,14 +75,6 @@ p{
     text-align: center;
     border-radius: 4px;
 }
-
-.carousel-control-prev,
-.carousel-control-next {
-    backgorund-color: transparent;
-    border: none;
-
-}
-
 
 .sticky-bar {
     width: 22%;
