@@ -28,6 +28,12 @@ class ReservationForm(forms.ModelForm):
             'phone_number': 'Phone',
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.pk:
+            self.fields['date'].initial = self.instance.date_time.date()
+            self.fields['time'].initial = self.instance.date_time.strftime('%H:%M')
+
     def save(self, commit=True):
         """
         saves date and time from to fields to a single one

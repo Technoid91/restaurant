@@ -11,7 +11,7 @@
       <h3>{% trans "Sign Up" %}</h3>
 
       <p>{% blocktrans %}
-        Welcome back to the code|star blog.
+        Welcome to the Pixel Steak Restaurant!
         Do you already have an account? Then please
         <a class="link" href="{{ login_url }}">sign in</a>
         instead.
@@ -23,7 +23,7 @@
       <form class="signup" id="signup_form" method="post"
         action="{% url 'account_signup' %}">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form | crispy }}
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}"
           value="{{ redirect_field_value }}" />

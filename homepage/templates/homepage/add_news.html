@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidebar %}
+
+{% endblock sidebar%}
+
+
+{% block content %}
+    <h1 class="text-center">Add news</h1>
+    <hr>
+    <div class="container w-75">
+        <form method="POST" action="{% url 'add_news' %}" class="form mb-2 light-bg p-3 rounded" enctype="multipart/form-data">
+            <fieldset>
+                {% csrf_token %}
+                {{ form | crispy }}
+            </fieldset>
+            <div class="text-right">
+                <a class="btn btn-secondary" href="{% url 'home' %}">Back</a>
+                <button class="btn btn-success" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

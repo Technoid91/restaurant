@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidebar %}
+        <div class="container side-info">
+            <h3><i class="fa-solid fa-clock"></i> Working hours</h3>
+            <hr>
+            <p>15:00 - 23:00</p>
+            <p>every day</p>
+        </div>
+
+        <div class="container side-info">
+            <h3><i class="fa-solid fa-location-dot"></i> Address</h3>
+            <hr>
+            <p>Bootstrap st. Tralee, Co.Kerry</p>
+        </div>
+{% endblock sidebar %}
+
+{% block content %}
+    {% if user.is_superuser %}
+        <div class="row">
+            <div class="booking-container table-responsive">
+                <h2 class="text-center">Restaurant reservations</h2>
+                <table class="table table-sm text-white">
+                    <thead class="bg-brown">
+                        <tr class="text-center">
+                            <th>Ref.</th>
+                            <th>Date & Time</th>
+                            <th>Name</th>
+                            <th>Guests</th>
+                            <th>Tables</th>
+                            <th>Phone</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr>
+                            <td class="py-2 text-start" colspan="7">
+                                <a class="btn-success text-decoration-none py-1 px-3" href="{% url 'booking' %}">
+                                    <i class="fa-solid fa-plus"></i>
+                                    Create New
+                                </a>
+                            </td>
+                        </tr>
+                        {% if upcoming_reservations %}
+                            {% for reservation in upcoming_reservations %}
+                                <tr class="{% if reservation.cancelled_by_user %} bg-danger {% else %} text-white {% endif %}">
+                                    {% if reservation.cancelled_by_user %}
+                                        <td>CANCELLED</td>
+                                    {% else %}
+                                        <td>{{ reservation.reference }}</td>
+                                    {% endif %}
+                                    <td>{{ reservation.date_time }}</td>
+                                    <td>{{ reservation.first_name}} {{ reservation.last_name}}</td>
+                                    <td>{{ reservation.party_size}}</td>
+                                    <td>
+                                        {% for table in reservation.table_number.all %}
+                                            {{ table.table_number }}
+                                            {% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td>{{ reservation.phone_number }}</td>
+                                    <td>
+                                        <a class="text-danger bg-white px-1 rounded" href="{% url 'delete_reservation' reservation.id %}">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                        {% if past_reservations %}
+                            {% for reservation in past_reservations %}
+                                <tr class="text-white-secondary">
+                                    {% if reservation.cancelled_by_user %}
+                                        <td>CANCELLED</td>
+                                    {% else %}
+                                        <td>{{ reservation.reference }}</td>
+                                    {% endif %}
+                                    <td>{{ reservation.date_time }}</td>
+                                    <td>{{ reservation.first_name}} {{ reservation.last_name}}</td>
+                                    <td>{{ reservation.party_size}}</td>
+                                    <td>
+                                        {% for table in reservation.table_number.all %}
+                                            {{ table.table_number }}
+                                            {% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td>{{ reservation.phone_number }}</td>
+                                    <td>
+                                        <a class="text-danger bg-white px-1 rounded" href="{% url 'delete_reservation' reservation.id %}">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+{% endblock content %}

@@ -4,42 +4,90 @@
 
 {% block sidebar%}
 
-{% for new in all_news %}
-<div class="row d-flex align-items-center text-center text-light side-items" style="height:80px;">
-    <div class="col-3">
-        {% if "placeholder" in new.image.url %}
-        <img src="{% static 'images/default_news.jpg' %}" alt="placeholder image">
-        {% else %}
-        <img src="{{new.image.url}}" class="d-block w-100" alt="{{ new.title }}">
+<div class="carousel-indicators"></div>
+    {% for index, new in all_news %}
+        <div class="row d-flex align-items-center text-center side-items" data-bs-target="#carouselNews" data-bs-slide-to="{{ index }}" style="height:80px;">
+            <div class="col-3">
+                {% if "placeholder" in new.image.url %}
+                    <img src="{% static 'images/default_news.jpg' %}" class="d-block w-100" alt="placeholder image">
+                {% else %}
+                    <img src="{{ new.image.url }}" class="d-block w-100" alt="{{ new.title }}">
+                {% endif %}
+            </div>
+            <div class="col text-light">
+                <p>{{new.title}}</p>
+            </div>
+            {% if user.is_superuser %}
+                <div class="col-1 px-0 mx-0">
+                    <button class="admin-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#adminControls-{{ index }}" aria-expanded="false" aria-controls="adminControls-{{ index }}">
+                        <i class="fa-solid fa-caret-down"></i>
+                    </button>
+                </div>
+            {% endif %}
+        </div>
+        {% if user.is_superuser %}
+            <div class="collapse" id="adminControls-{{ index }}">
+                <div class="row mb-5 mt-2">
+                    <div class="col-4 text-center">
+                        <a href="{% url 'add_news' %}" class="admin-control">
+                            <i class="fa-solid fa-plus"></i>
+                            Add New
+                        </a>
+                    </div>
+                    <div class="col-4 text-center">
+                        <a href="{% url 'edit_news' new.id %}" class="admin-control">
+                            <i class="fa-solid fa-pencil"></i>
+                            Edit
+                        </a>
+                    </div>
+                    <div class="col-4 text-center">
+                        <a href="{% url 'delete_news' new.id %}" class="admin-control">
+                            <i class="fa-solid fa-xmark"></i>
+                            Delete
+                        </a>
+                    </div>
+                </div>
+            </div>
         {% endif %}
-    </div>
-    <div class="col">
-        <p>{{new.title}}</p>
-    </div>
-</div>
-{% endfor %}
+
+    {% endfor %}
 
 {% endblock sidebar %}
 
 
 {% block content %}
-<div class="carousel slide" id="carouselNews" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        {% for new in all_news %}
-        <div class="carousel-item {% if forloop.first %}active {% endif %}">
-            {% if "placeholder" in new.image.url %}
-            <img src="{% static 'images/default_news.jpg' %}" alt="placeholder image">
-            {% else %}
-            <img src="{{new.image.url}}" class="d-block w-100" alt="{{ new.title }}">
-            {% endif %}
-            <div class="carousel-caption">
-                <h5 class="news-title">{{ new.title }}</h5>
-                <p class="news-text">{{ new.text }}</p>
+    <div id="carouselNews" class="carousel slide mb-3" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for index, new in all_news %}
+            <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                {% if "placeholder" in new.image.url %}
+                    <img src="{% static 'images/default_news.jpg' %}" class="d-block w-100" alt="placeholder image">
+                {% else %}
+                    <img src="{{new.image.url}}" class="d-block w-100" alt="{{ new.title }}">
+                {% endif %}
+                <div class="carousel-caption w-80">
+                    <h5 class="news-title">{{ new.title }}</h5>
+                    <p class="news-text">{{ new.text }}</p>
+                </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
-</div>
-
-
 {% endblock content %}
+
+{% block postloadjs %}
+{{ block.super }}
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function() {
+            let newsTitles = document.querySelectorAll(".side-items p");
+            let carousel = document.getElementById("carouselNews");
+            newsTitles.forEach(function(title, index) {
+                title.addEventListener("click", function() {
+                    if (!carousel.querySelector('.carousel-item:nth-child(' + (index + 1) + ')').classList.contains('active')) {
+                        $('#carouselNews').carousel(index);
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

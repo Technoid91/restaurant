@@ -2,22 +2,48 @@
 
 {% load static %}
 
-
-
-
 {% block sidebar %}
-<div class="sticky-bar">
-    <h4 class="text-center">Categories:</h4>
-    {% for category in categories %}
-    <div class="container side-items">
-        <a class="nav-link" href="#{{category.name}}">{{ category.name }}</a>
-    </div>
-    {% endfor %}
-</div>
+    <div class="sticky-bar">
+        {% if user.is_superuser %}
+            <div class="container border-thick border-danger rounded text-center mb-3 p-3">
+                <h4 class="text-danger text-uppercase">Admin</h4>
+                <hr>
+                <a href="{% url 'add_category' %}" class="admin-control">
+                    <div class="d-inline-block">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <div class="d-inline-block">
+                        <p>Add category</p>
+                    </div>
+                </a>
+                <a href="{% url 'add_food' %}" class="admin-control">
+                    <div class="d-inline-block">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <div class="d-inline-block">
+                        <p>Add item</p>
+                    </div>
+                </a>
+                <hr>
+                <h4>Empty categories</h4>
+                {% for category in empty_categories %}
+                    <div class="border-black">
+                        {{ category.name }}
+                        <a href="{% url 'delete_category' category.id %}" class="text-danger">
+                            <i class="fa-solid fa-xmark"></i>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
 
+        <h4 class="text-center">Categories:</h4>
+        {% for category in categories %}
+            <a class="side-items" href="#{{category.name}}">{{ category.name }}</a>
+        {% endfor %}
+    </div>
 
 {% endblock sidebar%}
-
 
 
 {% block content %}
@@ -26,7 +52,21 @@
 
 {% for category in categories %}
 
-<h2 id="{{ category.name }}" class="text-center text-uppercase">{{ category.name }}</h2>
+<div>
+    <h2 id="{{ category.name }}" class="text-center text-uppercase"> {{ category.name }} </h2>
+    {% if user.is_superuser %}
+        <div class="text-center">
+            <a href="{% url 'rename_category' category.id %}" class="admin-control h6">
+                <i class="fa-solid fa-pencil"></i>
+                Rename
+            </a>
+            <a href="{% url 'delete_category' category.id %}" class="admin-control h6 mx-1">
+                <i class="fa-solid fa-xmark"></i>
+                Delete
+            </a>
+        </div>
+    {% endif %}
+</div>
 <hr>
 <div class="row">
     {% for food in category.food_set.all %}
@@ -47,7 +87,25 @@
                     {% endif %}
                 </div>
                 <p class="card-text mt-auto">{{ food.description }}</p>
-                <p class="mt-auto text-end item-price">€ {{ food.price }}</p>
+                <p class="mt-auto item-price">€ {{ food.price }}</p>
+                <div class="row">
+                    {% if user.is_superuser %}
+                        <div class="row">
+                            <div class="col text-end">
+                                <a href="{% url 'edit_food' food.id %}" class="admin-control">
+                                    <i class="fa-solid fa-pencil"></i>
+                                    Edit
+                                </a>
+                            </div>
+                            <div class="col">
+                                <a href="{% url 'delete_food' food.id %}" class="admin-control mx-1">
+                                    <i class="fa-solid fa-xmark"></i>
+                                    Delete
+                                </a>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

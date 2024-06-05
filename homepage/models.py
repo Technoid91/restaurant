@@ -11,7 +11,7 @@ class New(models.Model):
     represent them on the home page
 
     """
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200)
     image = CloudinaryField('image', default='placeholder')
     text = models.TextField()
     posted_on = models.DateTimeField(auto_now_add=True)

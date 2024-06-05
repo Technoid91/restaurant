@@ -4,85 +4,101 @@
 
 
 {% block sidebar %}
+        <div class="container side-info">
+            <h3><i class="fa-solid fa-clock"></i> Working hours</h3>
+            <hr>
+            <p>15:00 - 23:00</p>
+            <p>every day</p>
+        </div>
 
-<div class="container side-info">
-    <h3><i class="fa-solid fa-clock"></i> Working hours</h3>
-    <hr>
-    <p>15:00 - 23:00</p>
-    <p>every day</p>
-</div>
-
-<div class="container side-info">
-    <h3><i class="fa-solid fa-location-dot"></i> Address</h3>
-    <hr>
-    <p>Bootstrap st. Tralee, Co.Kerry</p>
-</div>
-
+        <div class="container side-info">
+            <h3><i class="fa-solid fa-location-dot"></i> Address</h3>
+            <hr>
+            <p>Bootstrap st. Tralee, Co.Kerry</p>
+        </div>
 {% endblock sidebar %}
 
 
 {% block content %}
-
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-
-{% if user.is_authenticated %}
-
-<div id="booking-table">
-    <h2>Book a Table</h2>
-    <form method="post">
-        {% csrf_token %}
-        <div class="container">
-            <!-- Здесь размещается форма для бронирования -->
-            <div class="row">
-                <div class="col-12 col-md">
-                    {{ form.party_size|as_crispy_field }}
-                </div>
-                <div class="col-12 col-md">
-                    {{ form.date|as_crispy_field }}
-                </div>
-                <div class="col-12 col-md time-input">
-                    {{ form.time|as_crispy_field }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    {{ form.first_name|as_crispy_field }}
-                </div>
-                <div class="col">
-                    {{ form.last_name|as_crispy_field }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-4">
-                    {{ form.phone_number|as_crispy_field }}
-                </div>
-                <div class="col-8">
-                    {{ form.email|as_crispy_field }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-9">
-                    {{ form.comments|as_crispy_field }}
-                </div>
-                <div class="col-3">
-                    <button type="submit" class="btn btn-primary">Book Table</button>
-                </div>
+    <div class="row">
+        <div class="col">
+            <div id="booking-table" class="booking-container">
+                <h2 class="text-center">Book a Table</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-md">
+                                {{ form.party_size|as_crispy_field }}
+                            </div>
+                            <div class="col-12 col-md">
+                                {{ form.date|as_crispy_field }}
+                            </div>
+                            <div class="col-12 col-md time-input">
+                                {{ form.time|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                {{ form.first_name|as_crispy_field }}
+                            </div>
+                            <div class="col">
+                                {{ form.last_name|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                {{ form.phone_number|as_crispy_field }}
+                            </div>
+                            <div class="col-8">
+                                {{ form.email|as_crispy_field }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9">
+                                {{ form.comments|as_crispy_field }}
+                            </div>
+                            <div class="col-3">
+                                <button type="submit" class="btn btn-primary">Book Table</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </form>
-</div>
-
-{% else %}
-<div class="container side-info">
-    <h3>Please <a href="{% url 'account_login' %}">log in</a> or <a href="{% url 'account_signup' %}">signup</a> first</h3>
-</div>
-{% endif%}
-
+        <div class="col">
+            <div class="booking-container">
+                <h2 class="text-center">Your reservations</h2>
+                    <table class="table table-sm text-white">
+                        <thead class="bg-brown">
+                            <tr class="text-center">
+                                <th>Ref.Number</th>
+                                <th>Date & Time</th>
+                                <th>Guests</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            {% if reservations %}
+                                {% for reservation in reservations %}
+                                    <tr class="{% if reservation.cancelled_by_user %} text-white-secondary {% endif %}">
+                                        <td>
+                                            {% if reservation.cancelled_by_user %}
+                                                CANCELLED
+                                            {% else %}
+                                                <a class="text-white" href="{% url 'view_booking' reservation.id %}">
+                                                    {{reservation.reference}}
+                                                </a>
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ reservation.date_time }}</td>
+                                        <td>{{ reservation.party_size}}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
 
 {% endblock content %}

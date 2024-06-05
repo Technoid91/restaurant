@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime, timedelta
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.utils import timezone
 from django.contrib import messages
 from .models import Table, Reservation
@@ -25,9 +25,11 @@ def booking(request):
 
             current_datetime = timezone.now()
             if date_time <= current_datetime:
-                form.add_error(None, "Date and time can not be in past")
+                messages.add_message(
+                    request, messages.ERROR,
+                    "Date and time can not be in past")
                 return render(
-                    request, 'booking/booking-template.html', {'form': form}
+                    request, 'booking/booking.html', {'form': form}
                 )
 
             start_time = date_time - timedelta(hours=1, minutes=59)
@@ -65,6 +67,7 @@ def booking(request):
 
                     new_reservation = form.save(commit=False)
                     new_reservation.date_time = date_time
+                    new_reservation.user = request.user
                     new_reservation.reference = str(uuid.uuid4())[:8]
                     new_reservation.save()
                     new_reservation.table_number.set(assigned_tables)
@@ -83,9 +86,18 @@ def booking(request):
                     form.add_error(None, "Sorry, no tables available for "
                                          "the requested amount of people")
     else:
-        form = ReservationForm()
+        if request.user.is_authenticated:
+            form = ReservationForm()
 
-    return render(request, 'booking/booking.html', {'form': form})
+            reservations = Reservation.objects.filter(user=request.user).order_by('-date_time')
+
+            context = {
+                'form': form,
+                'reservations': reservations,
+            }
+            return render(request, 'booking/booking.html', context)
+        else:
+            return redirect('account_signup')
 
 
 def booking_details(request, reference):
@@ -96,3 +108,62 @@ def booking_details(request, reference):
     reservation = get_object_or_404(Reservation, reference=reference)
     return render(request, 'booking/booking_details.html',
                   {'reservation': reservation})
+
+
+def view_booking(request, reservation_id):
+    reservation = get_object_or_404(Reservation, pk=reservation_id)
+
+    cancellation_option = True
+
+    context = {
+        'reservation': reservation,
+        'cancellation_option': cancellation_option,
+    }
+
+    return render(request, 'booking/booking_details.html', context)
+
+
+def admin_bookings(request):
+    current_datetime = timezone.now()
+
+    upcoming_reservations = Reservation.objects.filter(date_time__gt=current_datetime).order_by('-date_time')
+    past_reservations = Reservation.objects.filter(date_time__lte=current_datetime).order_by('-date_time')
+
+    context = {
+        'upcoming_reservations': upcoming_reservations,
+        'past_reservations': past_reservations,
+    }
+    return render(request, 'booking/admin_bookings.html', context)
+
+
+def cancel_reservation(request, reservation_id):
+
+    reservation = get_object_or_404(Reservation, pk=reservation_id)
+    if request.method == 'POST':
+        last_name = request.POST.get('last_name')
+
+        if last_name and last_name == reservation.last_name:
+            reservation.cancelled_by_user = True
+            reservation.table_number.clear()
+            reservation.save()
+            messages.success(request, 'Your reservation was cancelled successfully!')
+            return redirect('booking')
+        else:
+            messages.error(request, 'Failed to cancel reservation. Last name does not match.')
+
+    template = 'booking/cancel_booking.html'
+    context = {
+        'reservation': reservation,
+    }
+    return render(request, template, context)
+
+
+def delete_reservation(request, reservation_id):
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only site admin can do that.')
+        return redirect(reverse('home'))
+
+    reservation = get_object_or_404(Reservation, pk=reservation_id)
+    reservation.delete()
+    messages.success(request, 'Reservation deleted successfully!')
+    return redirect('admin_bookings')

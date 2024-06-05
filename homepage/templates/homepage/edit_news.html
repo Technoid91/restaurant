@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidebar %}
+
+{% endblock sidebar%}
+
+
+{% block content %}
+    <h1 class="text-center">Edit "{{ news.title }}" material</h1>
+    <hr>
+    <div class="container w-75">
+        <form method="POST" action="{% url 'edit_news' news.id %}" class="form mb-2 light-bg p-3 rounded" enctype="multipart/form-data">
+            <fieldset>
+                {% csrf_token %}
+                {{ form | crispy }}
+                {% if news.image %}
+                    <img src="{{ news.image.url }}" alt="{{ news.title }}" class="img-fluid">
+                {% endif %}
+            </fieldset>
+            <div class="text-right">
+                <a class="btn btn-secondary" href="{% url 'home' %}">Back</a>
+                <button class="btn btn-success" type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

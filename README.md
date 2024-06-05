@@ -75,8 +75,3 @@ already.
 The menu structure allows to add filters (e.g. "vegan only"), and
 order by feature. It also can add special styling to highlight 
 price drops
-
-- ### Booking management
-Ability for user to edit or cancel the reservation. It can be done
-by creating user account web page or using reservation
-reference number as a unique secure ID.

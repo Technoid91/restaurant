@@ -4,12 +4,6 @@
 
 {% block sidebar %}
 
-
-
-
-
-
-
 <div class="container side-info">
     <h3><i class="fa-solid fa-clock"></i> Working hours</h3>
     <hr>
@@ -27,20 +21,58 @@
 
 {% block content %}
 
-{% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
+    <div class="row mt-2">
+        <div class="col">
+            <div class="container">
+                {% if not cancellation_option %}
+                    <h3 class="text-center">Thank you for booking!</h3>
+                {% endif %}
+                <h4 class="text-center">Booking details</h4>
+                <hr>
+                <div class="row">
+                    <div class="col mx-0">
+                        <p>Reference number: </p>
+                        <p>Name: </p>
+                        <p>Date and time: </p>
+                        <p>Number of guests: </p>
+                    </div>
+                    <div class="col mx-0">
+                        <p>{{ reservation.reference }}</p>
+                        <p>{{reservation.first_name}} {{reservation.last_name}}</p>
+                        <p>{{ reservation.date_time }}</p>
+                        <p>{{ reservation.party_size }}</p>
+                    </div>
+                </div>
 
-<h1>Thank you for booking</h1>
-<h3>Booking details</h3>
-<h3>Reference number: {{ reservation.reference }}</h3>
-<p>Call us if you wish to cancel your reservation</p>
-<p>Name: {{reservation.first_name}} {{reservation.last_name}}</p>
-<p>Date and time: {{ reservation.date_time }}</p>
+                <hr>
+                <h5 class="text-center">See you in Pixel Steak!</h5>
+            </div>
 
+            <div class="text-center mt-4">
+                {% if not cancellation_option %}
+                    <a href="{% url 'home' %}" class="admin-control">Back to home page</a>
+                {% else %}
+                    <a href="{% url 'booking' %}" class="admin-control">Back to booking</a>
+                {% endif %}
+            </div>
+
+        </div>
+        <div class="container my-4 h-50 d-sm-block d-lg-none">
+            <hr>
+        </div>
+        <div class="col">
+            <div class="container text-center">
+                {% if cancellation_option %}
+                    <h2 class="text-center mb-4">Booking cancellation</h2>
+                     <form method="post" action="{% url 'cancel_reservation' reservation.id %}">
+                         {% csrf_token %}
+                         <label class="mb-3" for="cancellation-input">To cancel this booking please type the last name from it</label>
+                         <input type="text" id="cancellation-input" name="last_name" required>
+                         <button type="submit" class="btn btn-danger mt-3">Cancel Booking</button>
+                     </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
 {% endblock content %}
