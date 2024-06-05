@@ -3,6 +3,32 @@ p{
 
 }
 
+.bg-brown {
+    background-color: brown;
+}
+
+.text-white-secondary {
+    color: #aaa;
+}
+
+.strikethrough {
+    text-decoration: line-through;
+}
+
+.message-container {
+    width: 30%;
+    padding: 15px;
+    font-size: 1.3rem;
+    position: absolute;
+    top: 100px;
+    right: 15px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    color: black;
+    z-index: 999999;
+}
+
 .btn-signup {
     border: 2px solid brown;
 }
@@ -23,9 +49,19 @@ p{
     font-size: 1.3rem;
 }
 
-.user_status {
+.user-status {
+    min-width: 100px;
     text-align: right;
-    padding-right: 5px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: .5rem;
+    color: rgba(255, 255, 255, .5);
+}
+
+.user-status:hover {
+    color: rgba(255, 255, 255, 1);
+    border-color: rgba(255, 255, 255, 1);
+    cursor: pointer;
 }
 
 .content-area {
@@ -43,36 +79,38 @@ p{
 }
 
 .side-items {
+    display: block;
     border: 2px solid grey;
     background-color: #657381;
     margin: 4px 0;
+    padding: 5px;
     text-align: center;
     color: lightgray;
-}
-
-.side-items a{
-    color: inherit;
     text-decoration: none;
 }
 
 .side-items:hover {
     background-color: brown;
     border: 2px solid tomato;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
 }
 
 .carousel {
-    max-width: 50%;
+    max-width: 70%;
     margin: auto;
 }
 
-.carousel-item {
-    height: 70vh;
+.carousel img {
+
+    object-fit: contain;
 }
 
 .carousel-caption {
-    width: 98%;
+    width: 100%;
     left: 0;
-    right: 0;
+    bottom: 0;
     padding: 5px;
     background-color: rgba(0,0,0,0.8);
     color: white;
@@ -89,25 +127,94 @@ p{
     display: none;
 }
 
+.admin-control {
+    color: brown;
+    padding: 3px;
+    border: 1px solid brown;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.admin-control:hover {
+    color: white;
+    background-color: brown;
+    cursor: pointer;
+}
+
+.admin-collapse {
+    background-color: inherit;
+    padding: 5px;
+    border: 1px solid black;
+    color: #fff;
+}
+
+.admin-collapse:hover {
+    background-color: white;
+    padding: 5px;
+    border-color: white;
+    color: #000;
+}
+
+.square-icon {
+    width: 2.5rem;
+}
+
+.border-thick {
+    border: 3px solid;
+}
+
+.btn-admin {
+    text-align: center;
+    border: 2px solid brown;
+    color: brown;
+    font-size: 1.2rem;
+    padding: 5px;
+    margin: 10px 0;
+}
+
+.btn-admin > a {
+    color: inherit;
+}
+
+.btn-admin:hover {
+    color: white;
+    background-color: brown;
+}
+
 .item-price {
     text-align: right;
 }
 
 
-#booking-table {
-    width: 50%;
+.booking-container {
+    width: 90%;
     margin: 0 auto 10px auto;
+    color: #eee;
     background-color: rgba(0,0,0,0.6);
     border-radius: 4px;
     padding: 6px;
 }
 
-#booking-table button {
+.booking-container button {
     margin-top: 5em;
 }
 
+.admin-reservation {
+    color: white;
+    font-size: 1.2rem;
+}
+.admin-reservation:hover {
+    background-color: brown;
+    cursor: pointer;
+}
 
 @media screen and (max-width: 600px){
+
+    .message-container {
+        width: 100%;
+        right: 0;
+    }
+
     .carousel {
         position: static;
         max-width: 100%;
@@ -129,6 +236,11 @@ p{
         background-color: rgba(0,0,0,0.6);
         border-radius: 4px;
         padding: 6px;
+    }
+
+
+    .table-responsive {
+        font-size: 50%;
     }
 
 }
