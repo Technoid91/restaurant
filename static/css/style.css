@@ -49,6 +49,10 @@ p{
     font-size: 1.3rem;
 }
 
+.nav-item:hover {
+    cursor: pointer;
+}
+
 .user-status {
     min-width: 100px;
     text-align: right;
@@ -66,6 +70,7 @@ p{
 
 .content-area {
     padding-top: 15px;
+    min-height: calc(100vh - 15rem);
 }
 
 .side-info {
@@ -170,6 +175,7 @@ p{
     font-size: 1.2rem;
     padding: 5px;
     margin: 10px 0;
+    cursor: pointer;
 }
 
 .btn-admin > a {
@@ -184,7 +190,6 @@ p{
 .item-price {
     text-align: right;
 }
-
 
 .booking-container {
     width: 90%;

@@ -7,9 +7,7 @@ from .forms import CategoryForm, FoodForm
 
 
 def show_menu(request):
-    """
-    Renders menu page with categories and dishes
-    """
+    """ Renders menu page with categories and dishes """
     categories_with_food = {}
     empty_categories = []
 
@@ -85,8 +83,9 @@ def rename_category(request, category_id):
 
     return render(request, template, context)
 
+
 def delete_category(request, category_id):
-    """ Delete a dish from the menu """
+    """ Delete category from the menu """
 
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only site admin can do that.')
@@ -110,7 +109,7 @@ def add_food(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully added dish!')
-            return redirect(reverse('add_food'))
+            return redirect(reverse('menu'))
         else:
             messages.error(request, 'Failed to add new dish. Please ensure the form is valid.')
     else:

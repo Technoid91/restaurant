@@ -9,7 +9,6 @@ class New(models.Model):
     """
     Stores news and special offers objects to
     represent them on the home page
-
     """
     title = models.CharField(max_length=200)
     image = CloudinaryField('image', default='placeholder')

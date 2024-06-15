@@ -14,9 +14,6 @@
             <fieldset>
                 {% csrf_token %}
                 {{ form | crispy }}
-                {% if news.image %}
-                    <img src="{{ news.image.url }}" alt="{{ news.title }}" class="img-fluid">
-                {% endif %}
             </fieldset>
             <div class="text-right">
                 <a class="btn btn-secondary" href="{% url 'home' %}">Back</a>
@@ -25,4 +22,19 @@
         </form>
     </div>
 
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                var currentImageLink = document.querySelector('.form-control.d-flex.h-auto a');
+                if (currentImageLink && currentImageLink.href) {
+                    var imgElement = document.createElement('img');
+                    imgElement.src = currentImageLink.href;
+                    imgElement.style.maxWidth = '100%';
+                    currentImageLink.parentNode.replaceChild(imgElement, currentImageLink);
+                }
+            });
+        </script>
 {% endblock %}

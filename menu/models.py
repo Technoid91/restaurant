@@ -1,9 +1,6 @@
 from django.db import models
 
-# Create your models here.
 
-
-# Menu categories
 class Category(models.Model):
     """
     Stores categories of dishes in menu
@@ -19,7 +16,7 @@ class Food(models.Model):
     """
     Stores a single dish record related to :model:`Category`
     """
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200,)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField()
     price = models.DecimalField(max_digits=8, decimal_places=2)
