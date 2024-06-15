@@ -11,10 +11,9 @@ and provides functionality to book a table or few.
 It introduces user the upcoming events and special offers.
 Designed as moving slides with titles and description,
 it also allows user to manipulate with slides by clicking on
-news list items on the left sidebar.
-The site owner can add, delete or edit slides to show,
-using administration panel. The website fetch them automatically
-from the cloud based data base
+news list items on the left sidebar. The mobile site user can just swipe.
+The site owner can add, delete or edit slides to show. The website fetch them automatically
+from the cloud based database. 
 
 
 - ### Menu
@@ -24,7 +23,7 @@ dishes using icons.
 The site owner can add, edit or delete categories and dishes
 in these categories. The web application show only categories
 which have dishes. When adding a new dish, site owner can specify
-is it vegan and hot spicy is it.
+is it vegan and how spicy is it.
 
 - ### Booking system
 Provides customer the form to fill out and book a table.
@@ -34,14 +33,23 @@ and avoid wasting tables at the same time. The system also
 checks the other reservations to prevent double booking.
 To make booking the user should be registered and logged in.
 
+The booking page contains the booking history, where the user can
+access the existing bookings, view the details and cancel the booking
+if he wants to.
+To avoid unintended cancellation, it is required to type the last name used
+for booking and then press 'Cancel booking'.
+
 - ### Responsive design
 Using Bootstrap and custom CSS make the web application look good
 both on mobile devices and desktop screens.
 
-- ## Admin Features
+<br>
+<hr>
 
-The admin (super user) of the web site can easily manage it's content directly from the web page.
-This features are available to the admin only and not visible for the site users
+## Admin Features
+
+The admin (superuser) of the website can easily manage it's content directly from the web page.
+This feature is available to the admin only and not visible for the site users.
 
 - ### News section
 
@@ -97,16 +105,17 @@ For HTML validation I have used [W3C Validator](https://validator.w3.org/)
 | Result for page                                                                                  | Errors           |
 |--------------------------------------------------------------------------------------------------|------------------|
 | [Home](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpixel-steak-5f7f6955f42e.herokuapp.com%2F) | No errors        |
-| [Menu page](https://pixel-steak-5f7f6955f42e.herokuapp.com/menu/)                                | Error in href attribute (cannot contain spaces). The links are for the same page, so it works as expected.
-| [Booking](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpixel-steak-5f7f6955f42e.herokuapp.com%2Fbooking%2Fall%2F) | No errors. But this page is not visible for unregistered users
+| [Menu page](https://pixel-steak-5f7f6955f42e.herokuapp.com/menu/)                                | Error in href attribute (cannot contain spaces). The links are for the same page, so it works as expected.|
+| [Booking](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpixel-steak-5f7f6955f42e.herokuapp.com%2Fbooking%2Fall%2F) | No errors. But this page is not visible for unregistered users|
 | [Sign Up](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpixel-steak-5f7f6955f42e.herokuapp.com%2Faccounts%2Fsignup%2F) | No errors |
 | [Log In](https://validator.w3.org/nu/?doc=https%3A%2F%2Fpixel-steak-5f7f6955f42e.herokuapp.com%2Faccounts%2Flogin%2F) | No errors |
 
 - ### CSS
-For CSS valiadtion I have used [CSS Jigsaw Validator](https://jigsaw.w3.org/css-validator/)
+For CSS validation I have used [CSS Jigsaw Validator](https://jigsaw.w3.org/css-validator/)
 
 No errors found
-[Result](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fpixel-steak-5f7f6955f42e.herokuapp.com%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
+
+[Jigsaw report](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fpixel-steak-5f7f6955f42e.herokuapp.com%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
 
 
 - ### Python
